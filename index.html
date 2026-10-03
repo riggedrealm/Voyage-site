@@ -106,7 +106,8 @@ main.wide{max-width:1180px}
 .s-dead .dot,.s-hostile .dot,.s-destroyed .dot,.s-arrested .dot{background:var(--crimson)}
 .empty{padding:var(--s5) var(--s4);border:2px dashed var(--line);text-align:center;color:var(--ash)}
 .empty .sg{display:flex;flex-wrap:wrap;gap:var(--s2);justify-content:center;margin-top:var(--s3)}
-.nm{all:unset;cursor:pointer;color:var(--bone);text-decoration:underline;text-decoration-color:var(--ash);text-decoration-thickness:2px;text-underline-offset:3px;border-radius:0}
+.nm{--ud:var(--ash);all:unset;cursor:pointer;color:var(--bone);text-decoration:underline;text-decoration-color:var(--ud);text-decoration-thickness:2px;text-underline-offset:3px;border-radius:0}
+.nm.k-crew{--ud:var(--gold)}.nm.k-enemy{--ud:var(--crimson)}
 .nm:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .coat{position:relative;background:var(--coat);color:var(--bone);outline:2px dashed var(--gold);outline-offset:-9px;isolation:isolate}
 .coat:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(var(--tone) 1.3px,transparent 1.5px) 0 0/8px 8px;pointer-events:none}
@@ -117,8 +118,8 @@ main.wide{max-width:1180px}
 .cover:after{content:"";position:absolute;left:9px;right:9px;top:9px;bottom:47px;border:2px dashed var(--gold);pointer-events:none}
 .cover>*:not(.kcol){position:relative}
 .cover .kcol{right:clamp(18px,3vw,40px);top:var(--s5)}
-.kcol span{display:inline-block;animation:stitch 400ms var(--ease) calc(var(--i) * 90ms) 1 both}
-@keyframes stitch{from{opacity:0;clip-path:inset(0 0 100% 0)}to{opacity:1;clip-path:inset(0)}}
+.kcol span{display:inline-block;animation:sew 400ms var(--ease) calc(var(--i) * 90ms) 1 both}
+@keyframes sew{from{opacity:0;clip-path:inset(0 0 100% 0)}to{opacity:1;clip-path:inset(0)}}
 .cap{display:block;width:fit-content;max-width:100%;background:var(--panel);color:var(--bone);border:2px solid var(--ink-line);padding:var(--s3) var(--s4)}
 .cap h1{font-size:clamp(26px,5vw,40px)}
 .cap p{margin:var(--s1) 0 0;color:var(--ash);font-size:15px;line-height:1.45}
@@ -176,7 +177,6 @@ main.wide{max-width:1180px}
 .fac h3{font-size:22px;color:var(--bone);margin-bottom:var(--s1)}
 .fac .st{margin:var(--s1) 0 var(--s2)}
 .fac p{margin:0;color:var(--ash);max-width:68ch}
-.coat .nm{color:var(--bone);text-decoration-color:var(--gold)}
 .places{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
 .place{background:var(--panel);border:2px solid var(--line);padding:var(--s3) var(--s4)}
 .place b{display:block;font-size:17px;line-height:1.3}
@@ -191,7 +191,7 @@ main.wide{max-width:1180px}
 .tl b{display:block;font-family:var(--display);font-weight:400;font-size:15px;color:var(--ash)}
 .tl span{color:var(--bone)}
 
-@media (hover:hover){.vol summary:hover .vt{text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:3px}.nm:hover{color:var(--ash)}}
+@media (hover:hover){.vol summary:hover .vt{text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:3px}.nm:hover{color:var(--ud)}}
 @media (max-width:700px){
  .cover{padding:var(--s5) 64px 72px var(--s4)}
  .cover:after{left:7px;right:7px}
@@ -235,6 +235,7 @@ main.wide{max-width:1180px}
 .char .ph i{font-family:var(--display);font-style:normal;font-size:42px;color:var(--ash)}
 .char .ph .foe{position:absolute;right:0;top:0;width:28px;height:28px;display:grid;place-items:center;background:var(--crimson);color:var(--on-fill);font-family:var(--brush);font-size:18px;font-style:normal;line-height:1}
 .char .cb{margin:-22px var(--s2) 0;background:var(--panel);border:2px solid var(--line);padding:var(--s1) var(--s3);position:relative}
+.char.crew .cb{border-top:4px solid var(--gold)}
 .char.enemy .cb{border-top:4px solid var(--crimson)}
 .char .cb b{display:block;line-height:1.25;font-size:16px}
 .char .cb small{display:block;color:var(--ash);font-size:14px;line-height:1.35}
@@ -345,8 +346,9 @@ dialog[open]{animation:dlgin 180ms var(--ease)}
 dialog::backdrop{background:color-mix(in srgb,var(--coat) 72%,transparent)}
 .dbar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:var(--s2);padding:var(--s2) var(--s3);background:var(--panel);border-bottom:2px solid var(--line)}
 .dbar .sp{flex:1}
-.kind{display:inline-block;padding:2px var(--s3);background:var(--bone);color:var(--asphalt);font-weight:700;font-size:14px}
-.kind.enemy{background:var(--crimson);color:var(--on-fill)}
+.kind{display:inline-block;padding:2px var(--s3);border:2px solid var(--line);color:var(--bone);font-weight:700;font-size:14px}
+.kind.crew{background:var(--gold);border-color:var(--gold);color:var(--on-fill)}
+.kind.enemy{background:var(--crimson);border-color:var(--crimson);color:var(--on-fill)}
 .dg{display:grid;grid-template-columns:240px minmax(0,1fr);gap:var(--s5);padding:var(--s5)}
 .dpic{align-self:start;aspect-ratio:4/5;border:2px solid var(--line);background:var(--tone);overflow:hidden;display:grid;place-items:center;
  background-image:radial-gradient(var(--tone) 1.3px,transparent 1.5px);background-size:8px 8px}
@@ -435,7 +437,7 @@ function byCast(a,b){var x=SORTW[a.status],y=SORTW[b.status];x=x==null?5:x;y=y==
 
 function charCard(p){var g=grp(p),ph=h("div",{class:"ph"});if(p.img)ph.appendChild(h("img",{src:p.img,alt:"",loading:"lazy",decoding:"async"}));else ph.appendChild(h("i",null,ini(p.name)));
  if(g==="enemy")ph.appendChild(h("i",{class:"foe","aria-hidden":"true"},"敵"));
- return h("button",{class:"char"+(g==="enemy"?" enemy":"")+(GONE[p.status]?" gone":""),type:"button",onclick:function(){openP(p)}},ph,h("div",{class:"cb"},h("b",null,p.name),meta(p)?h("small",null,meta(p)):null),stat(p.status,p.note),h("div",{class:"tx"},p.summary))}
+ return h("button",{class:"char"+(g==="enemy"?" enemy":g==="crew"?" crew":"")+(GONE[p.status]?" gone":""),type:"button",onclick:function(){openP(p)}},ph,h("div",{class:"cb"},h("b",null,p.name),meta(p)?h("small",null,meta(p)):null),stat(p.status,p.note),h("div",{class:"tx"},p.summary))}
 function roster(list,q){var l=list.filter(function(p){return match(p,q)});return l.length?h("div",{class:"roster"},l.map(charCard)):empty(q?"No one matches that search.":"No one here yet.")}
 
 /* ---- name linking ---- */
@@ -456,7 +458,7 @@ function linkify(t,self){if(!t)return[];if(!aliBuilt)buildAli();if(!ALIRE)return
  while((m=ALIRE.exec(t))){var p=ALI[m[1]];if(m.index>last)out.push(t.slice(last,m.index));
   if(p.id===self)out.push(m[0]);else out.push(nmBtn(p,m[0]));last=m.index+m[0].length}
  if(last<t.length)out.push(t.slice(last));return out}
-function nmBtn(p,txt){return h("button",{class:"nm",type:"button",onclick:function(){openP(p)}},txt)}
+function nmBtn(p,txt){var g=grp(p);return h("button",{class:"nm"+(g==="crew"?" k-crew":g==="enemy"?" k-enemy":""),type:"button",onclick:function(){openP(p)}},txt)}
 function humanWhen(w){var m=/^t(\d+)(?:-t?(\d+))?$/.exec(w||"");if(!m)return w;var a=+m[1],b=m[2]==null?a:+m[2];return a===b?"Turn "+a:"Turns "+a+"–"+b}
 var PRW={high:0,med:1,low:2};
 function byPri(a,b){return PRW[a.priority]-PRW[b.priority]}
@@ -612,7 +614,7 @@ function appearsIn(p){if(!aliBuilt)buildAli();var al=ALIBY[p.id];if(!al||!al.len
  return rows.slice(0,8)}
 function fillDialog(p){var g=grp(p),pic=$("#dpic");pic.textContent="";
  if(p.img)pic.appendChild(h("img",{src:p.img,alt:p.name,loading:"lazy",decoding:"async"}));else pic.appendChild(h("i",{"aria-hidden":"true"},ini(p.name)));
- var k=$("#dkind");k.textContent=KLABEL[g];k.className="kind"+(g==="enemy"?" enemy":"");
+ var k=$("#dkind");k.textContent=KLABEL[g];k.className="kind"+(g==="enemy"?" enemy":g==="crew"?" crew":"");
  $("#dt").textContent=p.name;var m=$("#dm");m.textContent="";m.appendChild(stat(p.status,p.note));
  var r=meta(p),ro=$("#drole");ro.textContent=r;ro.style.display=r?"":"none";
  var pr=peers(p),i=pr.indexOf(p),pv=pr[(i-1+pr.length)%pr.length],nx=pr[(i+1)%pr.length];
